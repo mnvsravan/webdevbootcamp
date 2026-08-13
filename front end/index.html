@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Profile Card</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-<img src="https://tse2.mm.bing.net/th/id/OIP.dHhxXTonQ0S9wBTPFo3vqQHaNK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="John" width="500" height="500">
-<h2> CR7 Goat</h2>
-<p>Male</p>
-<button>Toggle User</button>
-<br>
-<button>Random User</button>
+    <div class="card">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.dHhxXTonQ0S9wBTPFo3vqQHaNK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="User Image" id="user-image">
+        
+        <!-- Container for innerHTML -->
+        <div id="user-details" class="user-details">
+            <h2 id="user-name">CR7 GOAT</h2>
+            <p id="user-gender">Male</p>
+        </div>
+
+        <button onclick="toggleUser()">Toggle User</button>
+        <button onclick="randomUser()">Random User</button>
     </div>
     <script src="index.js"></script>
 </body>

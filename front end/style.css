@@ -18,8 +18,8 @@ body {
   overflow: hidden;
 }
 
-/* Glassmorphism Card Container */
-div {
+/* Outer Glassmorphism Card Container */
+.card {
   position: relative;
   width: 380px;
   padding: 30px 20px;
@@ -35,14 +35,14 @@ div {
 }
 
 /* Hover Effect on the Card */
-div:hover {
+.card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
               0 0 40px rgba(255, 0, 127, 0.4);
 }
 
 /* Profile Image Styling */
-img {
+.card img {
   width: 160px;
   height: 160px;
   object-fit: cover;
@@ -55,8 +55,17 @@ img {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-div:hover img {
+.card:hover img {
   transform: rotate(5deg) scale(1.05);
+}
+
+/* Inner details wrapper - keep transparent to prevent nested card duplication */
+.user-details {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  width: 100%;
 }
 
 /* Title (CR7 Goat) */
