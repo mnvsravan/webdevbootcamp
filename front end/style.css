@@ -1,322 +1,251 @@
 /* ==========================================================================
-   1. FONTS & ULTRA CYBER VARIABLE SYSTEM
+   1. CORE SETUP & MODERN RESET
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --cyan-glow: #00f3ff;
-  --pink-glow: #ff0055;
-  --purple-glow: #9d00ff;
-  --gold-glow: #ffcc00;
-  --bg-abyss: #020308;
-  --glass-card: rgba(8, 12, 28, 0.75);
-  --glass-border: rgba(0, 243, 255, 0.35);
+  /* Color Palette */
+  --bg-gradient-1: #0f172a;
+  --bg-gradient-2: #1e1b4b;
+  --bg-gradient-3: #311042;
+  
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-glow: rgba(99, 102, 241, 0.4);
+  
+  --accent: #ec4899;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  /* Layout Spacing */
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Share Tech Mono', monospace;
 }
 
-/* ==========================================================================
-   2. GOD-TIER CYBER GRID & PARTICLE BACKGROUND
-   ========================================================================== */
 body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, var(--bg-gradient-2), transparent 40%),
+              radial-gradient(circle at 80% 80%, var(--bg-gradient-3), transparent 40%),
+              var(--bg-gradient-1);
+  background-attachment: fixed;
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: var(--bg-abyss);
-  
-  /* Multi-Layered Moving Grid Pattern */
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(157, 0, 255, 0.2) 0%, transparent 65%),
-    linear-gradient(rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px),
-    linear-gradient(90deg, rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
-  background-position: center center;
-  
+  justify-content: center;
+  padding: 2rem 1rem;
   overflow-x: hidden;
-  position: relative;
-  padding: 20px;
-  perspective: 1200px;
-  animation: bgGridInfinite 25px linear infinite;
 }
 
-@keyframes bgGridInfinite {
-  0% { background-position: center center, 0 0, 0 0; }
-  100% { background-position: center center, 40px 40px, 40px 40px; }
-}
-
-/* Pulsing Cosmic Smoke Background */
+/* Background ambient glow effect */
 body::before {
   content: '';
   position: absolute;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(0, 243, 255, 0.25) 0%, rgba(255, 0, 85, 0.2) 40%, transparent 75%);
-  filter: blur(100px);
+  width: 300px;
+  height: 300px;
+  background: var(--primary-glow);
+  filter: blur(120px);
+  border-radius: 50%;
+  z-index: -1;
   pointer-events: none;
-  animation: cosmicAura 10s ease-in-out infinite alternate;
-}
-
-@keyframes cosmicAura {
-  0% { transform: scale(0.85) rotate(0deg); opacity: 0.7; }
-  100% { transform: scale(1.2) rotate(180deg); opacity: 1; }
 }
 
 /* ==========================================================================
-   3. SCI-FI NAV DOCK
+   2. GLASSMORPHIC NAVIGATION BAR
    ========================================================================== */
-body > div:first-of-type, nav {
+.navbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 35px;
-  padding: 8px 16px;
-  background: rgba(10, 16, 35, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 243, 255, 0.3);
-  border-radius: 50px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9),
-              0 0 20px rgba(0, 243, 255, 0.15);
-  z-index: 10;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.6rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2.5rem;
+  max-width: 90vw;
 }
 
-body > div:first-of-type a, nav a {
-  color: #8fa0b5;
+.navbar a {
   text-decoration: none;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 10px 20px;
-  border-radius: 30px;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
-body > div:first-of-type a:hover, nav a:hover {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(0, 243, 255, 0.25), rgba(255, 0, 85, 0.25));
-  box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-  text-shadow: 0 0 10px var(--cyan-glow);
-  transform: translateY(-3px) scale(1.05);
+.navbar a:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.navbar a:active {
+  transform: translateY(0);
 }
 
 /* ==========================================================================
-   4. HOLOGRAPHIC 3D HUD PROFILE CARD
+   3. S-TIER PROFILE CARD
    ========================================================================== */
 .card {
   position: relative;
-  width: 390px;
-  padding: 45px 30px;
-  background: var(--glass-card);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border-radius: 28px;
+  width: 100%;
+  max-width: 360px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95),
-              inset 0 0 25px rgba(0, 243, 255, 0.08);
-  text-align: center;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  transform-style: preserve-3d;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Cyber Overlay Scanline effect */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 243, 255, 0.04) 50%
-  );
-  background-size: 100% 4px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Rotating Neon Border Halo */
-.card::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 30px;
-  background: linear-gradient(90deg, var(--cyan-glow), var(--pink-glow), var(--purple-glow), var(--cyan-glow));
-  background-size: 300% 300%;
-  z-index: -1;
-  opacity: 0.5;
-  animation: borderRotate 5s linear infinite;
-  transition: opacity 0.4s ease;
-}
-
-@keyframes borderRotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.card:hover {
-  transform: translateY(-15px) rotateX(6deg) rotateY(-3deg) scale(1.03);
-  border-color: rgba(255, 0, 85, 0.8);
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 1),
-              0 0 50px rgba(255, 0, 85, 0.4),
-              0 0 90px rgba(0, 243, 255, 0.3);
-}
-
-.card:hover::after {
-  opacity: 1;
-}
-
-/* ==========================================================================
-   5. PROFILE IMAGE WITH NEON RING
-   ========================================================================== */
-.card img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  padding: 5px;
-  background: linear-gradient(135deg, var(--cyan-glow), var(--pink-glow));
-  box-shadow: 0 0 30px rgba(0, 243, 255, 0.6),
-              0 0 60px rgba(255, 0, 85, 0.3);
-  margin-bottom: 25px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  z-index: 3;
-}
-
-.card:hover img {
-  transform: scale(1.1) rotate(6deg);
-  box-shadow: 0 0 50px rgba(255, 0, 85, 0.8);
-}
-
-/* ==========================================================================
-   6. USER DETAILS & HOLOGRAPHIC NAME DISPLAY
-   ========================================================================== */
-.user-details {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  padding: 2.5rem 1.75rem 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 30px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  width: 100%;
-  position: relative;
-  z-index: 3;
+  text-align: center;
+  transition: var(--transition-smooth);
 }
 
-/* Ultra-Futuristic Glowing Header (CR7 GOAT) */
-h2, h2#user-name {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(
-    90deg, 
-    var(--cyan-glow) 0%, 
-    #ffffff 20%, 
-    var(--pink-glow) 50%, 
-    #ffffff 80%, 
-    var(--cyan-glow) 100%
-  );
-  background-size: 200% auto;
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45),
+              0 0 30px var(--primary-glow);
+}
+
+/* Profile Image Container & Rings */
+.card img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+  padding: 4px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.card:hover img {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* User Details Typography */
+.user-details {
+  margin-bottom: 1.75rem;
+  width: 100%;
+}
+
+.user-details h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
-  filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.7))
-          drop-shadow(0 0 30px rgba(255, 0, 85, 0.5));
-  
-  animation: shineGlow 3.5s linear infinite, floatAnimation 3s ease-in-out infinite alternate;
-  margin-bottom: 2px;
 }
 
-@keyframes shineGlow {
-  to { background-position: 200% center; }
-}
-
-@keyframes floatAnimation {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-5px); }
-}
-
-/* Futuristic Cyberpunk HUD Badge (MALE) */
-p, p#user-gender, .gender-badge {
+.user-details p {
   display: inline-block;
-  padding: 6px 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: var(--cyan-glow);
-  background: rgba(0, 243, 255, 0.1);
-  border: 1px solid rgba(0, 243, 255, 0.5);
-  border-radius: 30px;
-  box-shadow: 0 0 18px rgba(0, 243, 255, 0.25),
-              inset 0 0 12px rgba(0, 243, 255, 0.15);
+  font-size: 0.8125rem;
+  font-weight: 700;
   text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-p:hover, p#user-gender:hover, .gender-badge:hover {
-  background: rgba(0, 243, 255, 0.3);
-  box-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
-  transform: scale(1.08);
-  color: #fff;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: rgba(236, 72, 153, 0.12);
+  border: 1px solid rgba(236, 72, 153, 0.25);
+  padding: 0.25rem 0.875rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.25rem;
 }
 
 /* ==========================================================================
-   7. CYBER-ACTION GLOW BUTTONS
+   4. INTERACTIVE BUTTON GROUP
    ========================================================================== */
-button {
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   width: 100%;
-  padding: 16px 30px;
-  margin: 10px 0;
-  border: none;
-  outline: none;
-  border-radius: 14px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg, var(--cyan-glow), var(--purple-glow));
-  box-shadow: 0 5px 25px rgba(0, 243, 255, 0.4);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 3;
-  overflow: hidden;
 }
 
-button:nth-of-type(2) {
-  background: linear-gradient(135deg, var(--pink-glow), var(--purple-glow));
-  box-shadow: 0 5px 25px rgba(255, 0, 85, 0.4);
+button {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-main);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-fast);
+}
+
+/* Button Glow & Hover State */
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
 }
 
 button:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 40px rgba(0, 243, 255, 0.8);
-  letter-spacing: 3.5px;
-}
-
-button:nth-of-type(2):hover {
-  box-shadow: 0 12px 40px rgba(255, 0, 85, 0.8);
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary-glow);
+  transform: translateY(-2px);
 }
 
 button:active {
-  transform: translateY(1px) scale(0.97);
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Special styling for your custom API button */
+button:last-child {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: none;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+button:last-child:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5);
 }

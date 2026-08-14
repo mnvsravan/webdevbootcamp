@@ -21,7 +21,7 @@ function toggleUser() {
   isCR7 = !isCR7;
 }
 
-// Fetch random user from API
+// Fetch random user from external randomuser.me API
 function randomUser() {
   fetch("https://randomuser.me/api")
     .then(function (res) {
@@ -34,15 +34,32 @@ function randomUser() {
       const userGender = document.getElementById("user-gender");
       const userImage = document.getElementById("user-image");
 
-      const newUserName =
-        user.name.first + " " + user.name.last;
+      userName.innerText = user.name.first + " " + user.name.last;
+      userGender.innerText = user.gender;
+      userImage.src = user.picture.large;
+    })
+    .catch(function (err) {
+      console.log("Error occurred:", err);
+    });
+}
 
-      const newUserGender = user.gender;
-      const newUserImage = user.picture.large;
+// Fetch random user from your own local Express server API
+function myRandomUser() {
+  fetch("/api/random-user")
+    .then(function (res) {
+      if (!res.ok) {
+        throw new Error("Failed to fetch user");
+      }
+      return res.json();
+    })
+    .then(function (user) {
+      const userName = document.getElementById("user-name");
+      const userGender = document.getElementById("user-gender");
+      const userImage = document.getElementById("user-image");
 
-      userName.innerHTML = newUserName;
-      userGender.innerHTML = newUserGender;
-      userImage.src = newUserImage;
+      userName.innerText = user.name;
+      userGender.innerText = user.gender;
+      userImage.src = user.image;
     })
     .catch(function (err) {
       console.log("Error occurred:", err);

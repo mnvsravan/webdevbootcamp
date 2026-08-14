@@ -3,13 +3,13 @@ const app = express();
 
 const port = process.env.PORT || 8080;
 
-// Serve frontend files
+// Serve frontend static files from the 'front end' directory
 app.use(express.static('front end'));
 
-// Parse JSON request body
+// Parse JSON request bodies
 app.use(express.json());
 
-// Users data
+// Users mock database
 const users = [
     {
         id: 1,
@@ -75,14 +75,13 @@ const users = [
 
 let nextId = 11;
 
-// Find user index by ID
+// Helper to find array index by user ID
 function findIndex(id) {
     for (let i = 0; i < users.length; i++) {
         if (id === users[i].id) {
             return i;
         }
     }
-
     return -1;
 }
 
@@ -107,7 +106,6 @@ app.get("/api/users/:id", function (req, res) {
 
 // GET random user
 app.get("/api/random-user", function (req, res) {
-
     if (users.length === 0) {
         return res.status(404).json({
             message: "No user found"
@@ -115,13 +113,11 @@ app.get("/api/random-user", function (req, res) {
     }
 
     const randomIndex = Math.floor(users.length * Math.random());
-
     return res.json(users[randomIndex]);
 });
 
 // POST - Create new user
 app.post("/api/users", function (req, res) {
-
     const newUser = req.body;
 
     const tempUser = {
@@ -132,7 +128,6 @@ app.post("/api/users", function (req, res) {
     };
 
     nextId = nextId + 1;
-
     users.push(tempUser);
 
     return res.status(201).json({
@@ -141,9 +136,8 @@ app.post("/api/users", function (req, res) {
     });
 });
 
-// PUT - Update user
+// PUT - Update existing user
 app.put("/api/users/:id", function (req, res) {
-
     const id = Number(req.params.id);
     const index = findIndex(id);
 
@@ -168,9 +162,8 @@ app.put("/api/users/:id", function (req, res) {
     });
 });
 
-// DELETE - Delete user
+// DELETE - Remove user by ID
 app.delete("/api/users/:id", function (req, res) {
-
     const id = Number(req.params.id);
     const index = findIndex(id);
 
@@ -187,7 +180,7 @@ app.delete("/api/users/:id", function (req, res) {
     });
 });
 
-// Start server
+// Start Express server
 app.listen(port, function () {
     console.log("Server running on http://localhost:" + port);
 });
