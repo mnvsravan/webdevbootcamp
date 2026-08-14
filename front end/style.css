@@ -1,239 +1,322 @@
-/* Import Modern Font */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;800&display=swap');
+/* ==========================================================================
+   1. FONTS & ULTRA CYBER VARIABLE SYSTEM
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --neon-pink: #ff007f;
-  --neon-blue: #00f3ff;
-  --neon-purple: #9d00ff;
-  --bg-dark: #05070f;
-  --glass-bg: rgba(12, 16, 32, 0.45);
-  --glass-border: rgba(0, 243, 255, 0.2);
+  --cyan-glow: #00f3ff;
+  --pink-glow: #ff0055;
+  --purple-glow: #9d00ff;
+  --gold-glow: #ffcc00;
+  --bg-abyss: #020308;
+  --glass-card: rgba(8, 12, 28, 0.75);
+  --glass-border: rgba(0, 243, 255, 0.35);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Share Tech Mono', monospace;
 }
 
-/* Dynamic Animated Background */
+/* ==========================================================================
+   2. GOD-TIER CYBER GRID & PARTICLE BACKGROUND
+   ========================================================================== */
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at 50% 50%, #121829 0%, #05070f 100%);
+  background-color: var(--bg-abyss);
+  
+  /* Multi-Layered Moving Grid Pattern */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(157, 0, 255, 0.2) 0%, transparent 65%),
+    linear-gradient(rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-position: center center;
+  
   overflow-x: hidden;
   position: relative;
+  padding: 20px;
+  perspective: 1200px;
+  animation: bgGridInfinite 25px linear infinite;
 }
 
-/* Subtle background ambient mesh glow */
+@keyframes bgGridInfinite {
+  0% { background-position: center center, 0 0, 0 0; }
+  100% { background-position: center center, 40px 40px, 40px 40px; }
+}
+
+/* Pulsing Cosmic Smoke Background */
 body::before {
   content: '';
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 0, 127, 0.15), rgba(0, 243, 255, 0.15), transparent 70%);
-  filter: blur(80px);
-  animation: ambientFloat 10s infinite alternate ease-in-out;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.25) 0%, rgba(255, 0, 85, 0.2) 40%, transparent 75%);
+  filter: blur(100px);
   pointer-events: none;
+  animation: cosmicAura 10s ease-in-out infinite alternate;
 }
 
-@keyframes ambientFloat {
-  0% { transform: translate(-100px, -100px) scale(0.8); }
-  100% { transform: translate(100px, 100px) scale(1.2); }
+@keyframes cosmicAura {
+  0% { transform: scale(0.85) rotate(0deg); opacity: 0.7; }
+  100% { transform: scale(1.2) rotate(180deg); opacity: 1; }
 }
 
-/* Navigation Menu Polish */
-div:first-of-type {
+/* ==========================================================================
+   3. SCI-FI NAV DOCK
+   ========================================================================== */
+body > div:first-of-type, nav {
   display: flex;
-  gap: 15px;
+  gap: 8px;
   margin-bottom: 35px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-div:first-of-type a {
-  color: #8a99ad;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   padding: 8px 16px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-div:first-of-type a:hover {
-  color: #fff;
-  background: rgba(0, 243, 255, 0.1);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-  text-shadow: 0 0 8px var(--neon-blue);
-}
-
-/* Outer Glassmorphism Card Container */
-.card {
-  position: relative;
-  width: 380px;
-  padding: 40px 25px;
-  background: var(--glass-bg);
+  background: rgba(10, 16, 35, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 50px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9),
+              0 0 20px rgba(0, 243, 255, 0.15);
+  z-index: 10;
+}
+
+body > div:first-of-type a, nav a {
+  color: #8fa0b5;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+body > div:first-of-type a:hover, nav a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(0, 243, 255, 0.25), rgba(255, 0, 85, 0.25));
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+  text-shadow: 0 0 10px var(--cyan-glow);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* ==========================================================================
+   4. HOLOGRAPHIC 3D HUD PROFILE CARD
+   ========================================================================== */
+.card {
+  position: relative;
+  width: 390px;
+  padding: 45px 30px;
+  background: var(--glass-card);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   border-radius: 28px;
   border: 1px solid var(--glass-border);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
-              inset 0 0 15px rgba(0, 243, 255, 0.05);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95),
+              inset 0 0 25px rgba(0, 243, 255, 0.08);
   text-align: center;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  z-index: 1;
   overflow: hidden;
 }
 
-/* Animated Border Glow Accent */
+/* Cyber Overlay Scanline effect */
 .card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(transparent, var(--neon-pink), transparent 30%, var(--neon-blue));
-  animation: rotateBorder 6s linear infinite;
-  opacity: 0.3;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 243, 255, 0.04) 50%
+  );
+  background-size: 100% 4px;
   pointer-events: none;
-  z-index: -1;
+  z-index: 2;
 }
 
-@keyframes rotateBorder {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Glass Light-Sweep Hover Effect */
+/* Rotating Neon Border Halo */
 .card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -150%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: skewX(-25deg);
-  transition: left 0.75s ease;
-  pointer-events: none;
+  inset: -2px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, var(--cyan-glow), var(--pink-glow), var(--purple-glow), var(--cyan-glow));
+  background-size: 300% 300%;
+  z-index: -1;
+  opacity: 0.5;
+  animation: borderRotate 5s linear infinite;
+  transition: opacity 0.4s ease;
 }
 
-.card:hover::after {
-  left: 150%;
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .card:hover {
-  transform: translateY(-12px) scale(1.02);
-  border-color: rgba(255, 0, 127, 0.4);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9),
-              0 0 40px rgba(255, 0, 127, 0.3),
-              0 0 80px rgba(0, 243, 255, 0.2);
+  transform: translateY(-15px) rotateX(6deg) rotateY(-3deg) scale(1.03);
+  border-color: rgba(255, 0, 85, 0.8);
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 1),
+              0 0 50px rgba(255, 0, 85, 0.4),
+              0 0 90px rgba(0, 243, 255, 0.3);
 }
 
-/* Profile Image Styling */
+.card:hover::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   5. PROFILE IMAGE WITH NEON RING
+   ========================================================================== */
 .card img {
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
   padding: 5px;
-  background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
-  box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
-  margin-bottom: 20px;
-  transition: all 0.5s ease;
+  background: linear-gradient(135deg, var(--cyan-glow), var(--pink-glow));
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.6),
+              0 0 60px rgba(255, 0, 85, 0.3);
+  margin-bottom: 25px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 3;
 }
 
 .card:hover img {
-  transform: scale(1.08) rotate(3deg);
-  box-shadow: 0 0 35px rgba(255, 0, 127, 0.6);
+  transform: scale(1.1) rotate(6deg);
+  box-shadow: 0 0 50px rgba(255, 0, 85, 0.8);
 }
 
-/* Inner details wrapper */
+/* ==========================================================================
+   6. USER DETAILS & HOLOGRAPHIC NAME DISPLAY
+   ========================================================================== */
 .user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
   background: transparent;
+  border: none;
   padding: 0;
   width: 100%;
+  position: relative;
+  z-index: 3;
 }
 
-/* Title (CR7 GOAT) */
-h2 {
+/* Ultra-Futuristic Glowing Header (CR7 GOAT) */
+h2, h2#user-name {
   font-family: 'Orbitron', sans-serif;
-  color: #fff;
-  font-size: 1.7rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--neon-pink), #fff, var(--neon-blue));
+  color: #fff;
+  background: linear-gradient(
+    90deg, 
+    var(--cyan-glow) 0%, 
+    #ffffff 20%, 
+    var(--pink-glow) 50%, 
+    #ffffff 80%, 
+    var(--cyan-glow) 100%
+  );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 4s linear infinite;
-  margin-bottom: 6px;
+  
+  filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.7))
+          drop-shadow(0 0 30px rgba(255, 0, 85, 0.5));
+  
+  animation: shineGlow 3.5s linear infinite, floatAnimation 3s ease-in-out infinite alternate;
+  margin-bottom: 2px;
 }
 
-@keyframes shine {
+@keyframes shineGlow {
   to { background-position: 200% center; }
 }
 
-/* Subtitle (Male) */
-p {
-  color: #7b8a9e;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 30px;
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-5px); }
 }
 
-/* Button Base Styling */
+/* Futuristic Cyberpunk HUD Badge (MALE) */
+p, p#user-gender, .gender-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--cyan-glow);
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid rgba(0, 243, 255, 0.5);
+  border-radius: 30px;
+  box-shadow: 0 0 18px rgba(0, 243, 255, 0.25),
+              inset 0 0 12px rgba(0, 243, 255, 0.15);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+p:hover, p#user-gender:hover, .gender-badge:hover {
+  background: rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
+  transform: scale(1.08);
+  color: #fff;
+}
+
+/* ==========================================================================
+   7. CYBER-ACTION GLOW BUTTONS
+   ========================================================================== */
 button {
   width: 100%;
-  padding: 14px 28px;
-  margin: 8px 0;
+  padding: 16px 30px;
+  margin: 10px 0;
   border: none;
   outline: none;
   border-radius: 14px;
+  font-family: 'Orbitron', sans-serif;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-  box-shadow: 0 4px 20px rgba(0, 243, 255, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, var(--cyan-glow), var(--purple-glow));
+  box-shadow: 0 5px 25px rgba(0, 243, 255, 0.4);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  overflow: hidden;
 }
 
-/* Secondary Button Styling */
 button:nth-of-type(2) {
-  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-  box-shadow: 0 4px 20px rgba(255, 0, 127, 0.3);
+  background: linear-gradient(135deg, var(--pink-glow), var(--purple-glow));
+  box-shadow: 0 5px 25px rgba(255, 0, 85, 0.4);
 }
 
-/* Button Hover & Active States */
 button:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 30px rgba(0, 243, 255, 0.6);
-  letter-spacing: 2.5px;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 40px rgba(0, 243, 255, 0.8);
+  letter-spacing: 3.5px;
 }
 
 button:nth-of-type(2):hover {
-  box-shadow: 0 8px 30px rgba(255, 0, 127, 0.6);
+  box-shadow: 0 12px 40px rgba(255, 0, 85, 0.8);
 }
 
 button:active {
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(1px) scale(0.97);
 }
